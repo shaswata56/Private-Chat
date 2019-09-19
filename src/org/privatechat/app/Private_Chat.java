@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.GeneralSecurityException;
@@ -164,6 +165,10 @@ public class Private_Chat extends JFrame {
         app.name = app.jTextField4.getText();
     }
 
+    static String mssg;
+    public static void setMssg(String data){
+        mssg = data;
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -189,7 +194,7 @@ public class Private_Chat extends JFrame {
 
         EventQueue.invokeLater(() -> app.setVisible(true));
 
-        InetAddress ip = InetAddress.getByName("192.168.31.56");
+        /*InetAddress ip = InetAddress.getByName(app.ip);
         Socket socket = new Socket(ip, Integer.parseInt(app.port));
 
         DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -257,7 +262,103 @@ public class Private_Chat extends JFrame {
         });
 
         Sender.start();
-        Listener.start();
+        Listener.start();*/
+
+        if(Str.length == 2){
+            ServerSocket serversoc = new ServerSocket(Integer.parseInt(app.port));
+            serversoc.setSoTimeout(10000);
+            Socket server = serversoc.accept();
+            DataInputStream mssgin = new DataInputStream(server.getInputStream());
+            System.out.println(mssgin.readUTF()+" Just Connected");
+            DataOutputStream mssgout = new DataOutputStream(server.getOutputStream());
+            mssgout.writeUTF(app.name);
+            Thread input = new Thread(new Runnable() {
+                public void run() {
+                    while (true) {
+                        setMssg(app.msg);
+                    }
+                }
+            });
+            Thread inputmssg = new Thread(new Runnable() {
+                DataInputStream mssgin = new DataInputStream(server.getInputStream());
+                public void run() {
+                    while (true) {
+                        try {
+                            String out = mssgin.readUTF();
+                            app.jTextArea1.append(out);
+                           // System.out.println(out);
+                            if(out.equals("Exit")){
+                                server.close();
+                                System.exit(0);
+                            }
+                        } catch (IOException e) {
+                            System.exit(0);
+                        }
+                    }
+                }
+            });
+            input.start();
+            inputmssg.start();
+            while(true) {
+                mssgout = new DataOutputStream(server.getOutputStream());
+                if(mssg != null){
+                    mssgout.writeUTF(app.name+" : "+mssg);
+                    if(mssg.equals("Exit")){
+                        server.close();
+                        System.exit(0);
+                    }
+                    setMssg(null);
+                }
+            }
+        }
+        else if(Str.length == 3){
+            Socket client = new Socket(app.ip,Integer.parseInt(app.port));
+            DataOutputStream mssgout = new DataOutputStream(client.getOutputStream());
+            mssgout.writeUTF(app.name);
+            DataInputStream mssgin = new DataInputStream(client.getInputStream());
+            System.out.println("Just Connected with "+mssgin.readUTF());
+            Thread input = new Thread(new Runnable() {
+                public void run() {
+                    while (true) {
+                        setMssg(app.msg);
+                    }
+                }
+            });
+            Thread inputmssg = new Thread(new Runnable() {
+                DataInputStream mssgin = new DataInputStream(client.getInputStream());
+                public void run() {
+                    while (true) {
+                        try {
+                            String out = mssgin.readUTF();
+                            app.jTextArea1.append(out);
+                            System.out.println(out);
+                            if(out.equals("Exit")){
+                                client.close();
+                                System.exit(0);
+                            }
+                        } catch (IOException e) {
+                            System.exit(0);
+                        }
+                    }
+                }
+            });
+            input.start();
+            inputmssg.start();
+            while(true) {
+                mssgout = new DataOutputStream(client.getOutputStream());
+                if(mssg != null){
+                    mssgout.writeUTF(app.name+" : "+mssg);
+                    if(mssg.equals("Exit")){
+                        client.close();
+                        System.exit(0);
+                    }
+                    mssg = null;
+                }
+            }
+        }
+        else{
+            System.out.println("Usage :\nTo Connect :\nSocketChat yourname ip port\nTo Host :\nSocketChat yourname");
+        }
     }
 
     private JTextArea jTextArea1;

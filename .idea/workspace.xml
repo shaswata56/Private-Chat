@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bc70443-f2e1-4137-b1e1-75844b58f449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +32,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -85,7 +86,8 @@
       <workItem from="1568919384630" duration="1324000" />
       <workItem from="1568922870123" duration="788000" />
       <workItem from="1569005487443" duration="4191000" />
-      <workItem from="1569083596266" duration="8589000" />
+      <workItem from="1569083596266" duration="8865000" />
+      <workItem from="1569097029233" duration="1365000" />
     </task>
     <servers />
   </component>

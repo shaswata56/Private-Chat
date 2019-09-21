@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bc70443-f2e1-4137-b1e1-75844b58f449" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" afterDir="false" />
     </list>
@@ -13,6 +14,13 @@
   </component>
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +83,9 @@
       <workItem from="1568824530730" duration="867000" />
       <workItem from="1568918107445" duration="2000" />
       <workItem from="1568919384630" duration="1324000" />
+      <workItem from="1568922870123" duration="788000" />
+      <workItem from="1569005487443" duration="4191000" />
+      <workItem from="1569083596266" duration="8589000" />
     </task>
     <servers />
   </component>
@@ -83,7 +94,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

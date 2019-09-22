@@ -66,12 +66,14 @@ public class Private_Chat extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setForeground(new java.awt.Color(51, 255, 51));
-        jTextArea1.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 14));
+        jTextArea1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 14));
+        jTextArea1.setLineWrap(true);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField4.setHorizontalAlignment(JTextField.LEFT);
         jTextField4.setBackground(new java.awt.Color(0, 0, 0));
         jTextField4.setForeground(new java.awt.Color(51, 255, 51));
+        jTextField4.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13));
         jTextField4.addActionListener(this::jTextField4ActionPerformed);
 
         jButton1.setText("Send");

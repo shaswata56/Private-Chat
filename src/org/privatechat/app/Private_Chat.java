@@ -15,6 +15,7 @@ public class Private_Chat extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         JLabel jLabel1 = new JLabel();
+        jTextArea1 = new javax.swing.JTextArea();
         server = true; isSet = false;
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -22,7 +23,7 @@ public class Private_Chat extends javax.swing.JFrame {
         JLabel jLabel3 = new JLabel();
         jTextField3 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTextArea jTextArea1 = new JTextArea();
+        jTextArea1 = new JTextArea();
         jTextField4 = new javax.swing.JTextField();
         JButton jButton1 = new JButton();
         Box.Filler filler1 = new Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
@@ -172,11 +173,13 @@ public class Private_Chat extends javax.swing.JFrame {
     }
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        msg = jTextField4.getText().trim();
+        jTextField4.setText("");
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        msg = jTextField4.getText().trim();
+        jTextField4.setText("");
     }
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +206,6 @@ public class Private_Chat extends javax.swing.JFrame {
         }
         server = jRadioButton1.isSelected();
         isSet = true;
-        System.out.println("asbaksj");
     }
 
     public static void main(String[] args) {
@@ -224,28 +226,21 @@ public class Private_Chat extends javax.swing.JFrame {
         app.jLabel2.setVisible(false);
         app.jTextField2.setVisible(false);
 
-        /*while(true) {
+        while(true) {
             if(app.isSet) {
-                if(app.server) {
-                    System.out.println("in");
-                    ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
-                    serverListener.start();
-                    System.out.println("in");
-                    //serverListener.kill();
+                ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
+                serverListener.start();
+                while(true){
+                    serverListener.OutputStrem(app.msg,app.name);
                 }
             }
-        }*/
-        while(true) {
-
-            if(app.isSet) {
-                System.out.println("123456");
+            else{
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            System.out.println("789");
-            /*try {
-                Thread.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 

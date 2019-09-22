@@ -228,7 +228,7 @@ public class Private_Chat extends javax.swing.JFrame {
                 Toolkit xToolkit = Toolkit.getDefaultToolkit();
                 Field awtAppClassNameField = xToolkit.getClass().getDeclaredField("awtAppClassName");
                 awtAppClassNameField.setAccessible(true);
-                awtAppClassNameField.set(xToolkit, "IP Chat");
+                awtAppClassNameField.set(xToolkit, "Private Chat");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -261,7 +261,7 @@ public class Private_Chat extends javax.swing.JFrame {
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
                             serverListener.OutputStrem(app.msg, app.name);
-                            app.jTextArea1.append(app.msg);
+                            app.jTextArea1.append(app.name+": "+app.msg);
                             app.msg = "";
                         }
                         if(serverListener.checkMsg()){
@@ -288,7 +288,7 @@ public class Private_Chat extends javax.swing.JFrame {
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
                             clientSide.OutputStream(app.msg, app.name);
-                            app.jTextArea1.append(app.msg);
+                            app.jTextArea1.append(app.name+": "+app.msg);
                             app.msg = "";
                         }
                         if(clientSide.checkMsg()){

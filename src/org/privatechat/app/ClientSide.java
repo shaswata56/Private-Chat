@@ -39,7 +39,8 @@ public class ClientSide extends Thread{
                 try {
                     String out = dataInputStream.readUTF();
                     textArea.append(out);
-                    if(out.equalsIgnoreCase("Exit") || !client.isConnected()){
+                    String[] word = out.split(":");
+                    if(word[1].trim().equalsIgnoreCase("Exit") || !client.isConnected()){
                         connection = true;
                         kill();
                     }
@@ -57,7 +58,7 @@ public class ClientSide extends Thread{
     void OutputStream(String msg, String name) {
         if(connected){
             try {
-                dataOutputStream.writeUTF(msg);
+                dataOutputStream.writeUTF(name+": "+msg);
                 if (msg.equalsIgnoreCase("Exit")) {
                     connection = true;
                     kill();

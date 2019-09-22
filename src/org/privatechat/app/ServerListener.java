@@ -38,7 +38,8 @@ class ServerListener extends Thread {
                 try {
                     String out = dataInputStream.readUTF();
                     textArea.append(out);
-                    if(out.equals("Exit") || !sock.isConnected()){
+                    String[] word = out.split(":");
+                    if(word[1].trim().equalsIgnoreCase("Exit") || !sock.isConnected()){
                         connection = true;
                         kill();
                     }
@@ -54,7 +55,7 @@ class ServerListener extends Thread {
     void OutputStrem(String msg, String name){
         if(connected){
             try {
-                dataOutputStream.writeUTF(msg);
+                dataOutputStream.writeUTF(name+": "+msg);
                 if(msg.equals("Exit")){
                     connection = true;
                     kill();

@@ -30,6 +30,12 @@ class ServerListener extends Thread {
             serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(10000);
             sock = serverSocket.accept();
+<<<<<<< HEAD
+=======
+            this.textArea = textArea;
+            //this.textArea.append("help");
+            textArea.append("Exchanging Keys...\n");
+>>>>>>> cc0d4ad479a7136713bb4d596077a00ce859ff23
             dataInputStream = new DataInputStream(sock.getInputStream());
             dataOutputStream = new DataOutputStream(sock.getOutputStream());
            // dataOutputStream = new

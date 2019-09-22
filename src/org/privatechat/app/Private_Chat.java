@@ -22,8 +22,12 @@ public class Private_Chat extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         JLabel jLabel3 = new JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jTextArea1 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
+<<<<<<< HEAD
         jTextArea1 = new JTextArea();
+=======
+>>>>>>> cc0d4ad479a7136713bb4d596077a00ce859ff23
         jTextField4 = new javax.swing.JTextField();
         JButton jButton1 = new JButton();
         Box.Filler filler1 = new Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
@@ -225,9 +229,11 @@ public class Private_Chat extends javax.swing.JFrame {
         app.setResizable(false);
         app.jLabel2.setVisible(false);
         app.jTextField2.setVisible(false);
+        app.jTextArea1.append("help");
 
         while(true) {
             if(app.isSet) {
+<<<<<<< HEAD
                 ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
                 serverListener.start();
                 while(true){
@@ -240,6 +246,19 @@ public class Private_Chat extends javax.swing.JFrame {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+=======
+                if(app.server) {
+                    app.jTextArea1.append("Blink");
+                    System.out.println("in");
+                    ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
+                    serverListener.start();
+                }
+            }
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+>>>>>>> cc0d4ad479a7136713bb4d596077a00ce859ff23
             }
         }
     }

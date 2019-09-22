@@ -32,6 +32,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -85,7 +86,8 @@
       <workItem from="1568919384630" duration="1324000" />
       <workItem from="1568922870123" duration="788000" />
       <workItem from="1569005487443" duration="4191000" />
-      <workItem from="1569083596266" duration="8589000" />
+      <workItem from="1569083596266" duration="8865000" />
+      <workItem from="1569097029233" duration="1365000" />
     </task>
     <servers />
   </component>

@@ -14,7 +14,7 @@ class ServerListener extends Thread {
     private DataOutputStream dataOutputStream;
     private JTextArea textArea;
     private Socket sock;
-    private boolean kill = false, connected = false;
+    private boolean kill = false, connected = false, connection = false;
     private int port;
 
     ServerListener(int port, JTextArea textArea) {
@@ -38,8 +38,11 @@ class ServerListener extends Thread {
                 try {
                     String out = dataInputStream.readUTF();
                     textArea.append(out);
-                    if(out.equals("Exit") || !sock.isConnected())
+                    if(out.equals("Exit") || !sock.isConnected()){
+                        connection = true;
                         kill();
+                    }
+
                 } catch (IOException e) {
                     kill();
                 }
@@ -52,8 +55,10 @@ class ServerListener extends Thread {
         if(connected){
             try {
                 dataOutputStream.writeUTF(msg);
-                if(msg.equals("Exit"))
+                if(msg.equals("Exit")){
+                    connection = true;
                     kill();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,5 +79,8 @@ class ServerListener extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    boolean checkMsg(){
+        return connection;
     }
 }

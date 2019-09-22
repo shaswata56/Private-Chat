@@ -241,10 +241,14 @@ public class Private_Chat extends javax.swing.JFrame {
                             break;
                         }
                         if (!app.msg.equals("")) {
-                            //app.msg += '\n';
+                            app.msg += '\n';
                             serverListener.OutputStrem(app.msg, app.name);
                             app.jTextArea1.append(app.msg);
                             app.msg = "";
+                        }
+                        if(serverListener.checkMsg()){
+                            app.isSet = false;
+                            break;
                         }
                         try {
                             Thread.sleep(1);
@@ -264,10 +268,14 @@ public class Private_Chat extends javax.swing.JFrame {
                             break;
                         }
                         if (!app.msg.equals("")) {
-                            //app.msg += '\n';
+                            app.msg += '\n';
                             clientSide.OutputStream(app.msg, app.name);
                             app.jTextArea1.append(app.msg);
                             app.msg = "";
+                        }
+                        if(clientSide.checkMsg()){
+                            app.isSet = false;
+                            break;
                         }
                         try {
                             Thread.sleep(1);

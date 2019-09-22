@@ -11,7 +11,7 @@ public class ClientSide extends Thread{
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private String ip;
-    private boolean connected = false, kill = false;
+    private boolean connected = false, kill = false, connection = false;
     private int port;
     private JTextArea textArea;
 
@@ -39,14 +39,18 @@ public class ClientSide extends Thread{
                 try {
                     String out = dataInputStream.readUTF();
                     textArea.append(out);
-                    if(out.equalsIgnoreCase("Exit") || !client.isConnected())
+                    if(out.equalsIgnoreCase("Exit") || !client.isConnected()){
+                        connection = true;
                         kill();
+                    }
+
                 } catch (IOException e) {
                    break;
                 }
             }
 
         } catch (IOException ignored) {
+            ignored.printStackTrace();
         }
     }
 
@@ -55,6 +59,7 @@ public class ClientSide extends Thread{
             try {
                 dataOutputStream.writeUTF(msg);
                 if (msg.equalsIgnoreCase("Exit")) {
+                    connection = true;
                     kill();
                 }
             } catch (IOException e) {
@@ -62,7 +67,7 @@ public class ClientSide extends Thread{
             }
         }
     }
-    public void kill() {
+    void kill() {
         kill = true;
         try {
             if(dataOutputStream != null)
@@ -74,5 +79,8 @@ public class ClientSide extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    boolean checkMsg(){
+        return connection;
     }
 }

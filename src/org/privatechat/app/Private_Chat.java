@@ -29,6 +29,7 @@ public class Private_Chat extends javax.swing.JFrame {
         JScrollPane jScrollPane1 = new JScrollPane();
 
         jTextField4 = new javax.swing.JTextField();
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         JButton jButton1 = new JButton();
         Box.Filler filler1 = new Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         JButton jButton2 = new JButton();
@@ -63,15 +64,22 @@ public class Private_Chat extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
+        jTextArea1.setForeground(new java.awt.Color(51, 255, 51));
+        jTextArea1.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 14));
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField4.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField4.setForeground(new java.awt.Color(51, 255, 51));
         jTextField4.addActionListener(this::jTextField4ActionPerformed);
 
         jButton1.setText("Send");
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("Set");
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -41,7 +41,7 @@ class ServerListener extends Thread {
                     if(out.equals("Exit") || !sock.isConnected())
                         kill();
                 } catch (IOException e) {
-                    break;
+                    kill();
                 }
             }
         } catch (IOException ignored) {

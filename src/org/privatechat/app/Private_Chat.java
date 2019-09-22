@@ -23,11 +23,8 @@ public class Private_Chat extends javax.swing.JFrame {
         JLabel jLabel3 = new JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-<<<<<<< HEAD
-        jTextArea1 = new JTextArea();
-=======
->>>>>>> cc0d4ad479a7136713bb4d596077a00ce859ff23
+        JScrollPane jScrollPane1 = new JScrollPane();
+
         jTextField4 = new javax.swing.JTextField();
         JButton jButton1 = new JButton();
         Box.Filler filler1 = new Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
@@ -229,47 +226,72 @@ public class Private_Chat extends javax.swing.JFrame {
         app.setResizable(false);
         app.jLabel2.setVisible(false);
         app.jTextField2.setVisible(false);
-        app.jTextArea1.append("help");
+        app.jTextField2.setVisible(false);
 
         while(true) {
             if(app.isSet) {
-<<<<<<< HEAD
-                ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
-                serverListener.start();
-                while(true){
-                    serverListener.OutputStrem(app.msg,app.name);
-                }
-            }
-            else{
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-=======
                 if(app.server) {
-                    app.jTextArea1.append("Blink");
-                    System.out.println("in");
                     ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
                     serverListener.start();
+                    app.jTextArea1.append("Server Started\n");
+                    app.isSet = false;
+                    while (true) {
+                        if (app.isSet) {
+                            serverListener.kill();
+                            break;
+                        }
+                        if (!app.msg.equals("")) {
+                            //app.msg += '\n';
+                            serverListener.OutputStrem(app.msg, app.name);
+                            app.jTextArea1.append(app.msg);
+                            app.msg = "";
+                        }
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                else{
+                    ClientSide clientSide = new ClientSide(app.ip, Integer.parseInt(app.port), app.jTextArea1);
+                    clientSide.start();
+                    app.jTextArea1.append("Client Started\n");
+                    app.isSet = false;
+                    while (true) {
+                        if (app.isSet) {
+                            clientSide.kill();
+                            break;
+                        }
+                        if (!app.msg.equals("")) {
+                            //app.msg += '\n';
+                            clientSide.OutputStream(app.msg, app.name);
+                            app.jTextArea1.append(app.msg);
+                            app.msg = "";
+                        }
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
->>>>>>> cc0d4ad479a7136713bb4d596077a00ce859ff23
             }
         }
     }
 
     private javax.swing.JLabel jLabel2;
-    private String ip, name, port, msg;
-    private Boolean server, isSet;
+    private String ip, name, port;
+    private String msg = "";
+    private boolean server, isSet;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

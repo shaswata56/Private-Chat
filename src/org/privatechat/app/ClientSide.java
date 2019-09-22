@@ -12,7 +12,7 @@ public class ClientSide extends Thread{
     private DataInputStream dataInputStream;
     private String ip;
     private boolean connected = false, kill = false, connection = false;
-    private int port;
+    private int port, killcount = 0;
     private JTextArea textArea;
 
     ClientSide(String ip, int port, JTextArea textArea){
@@ -40,18 +40,16 @@ public class ClientSide extends Thread{
                     String out = dataInputStream.readUTF();
                     textArea.append(out);
                     String[] word = out.split(":");
-                    if(word[1].trim().equalsIgnoreCase("Exit") || !client.isConnected()){
-                        connection = true;
-                        kill();
-                    }
-
+                    if(word[1].trim().equalsIgnoreCase("Exit"))
+                        kill(false);
                 } catch (IOException e) {
-                   break;
+                    kill(false);
+                    break;
                 }
             }
 
         } catch (IOException ignored) {
-            ignored.printStackTrace();
+            kill(false);
         }
     }
 
@@ -59,17 +57,21 @@ public class ClientSide extends Thread{
         if(connected){
             try {
                 dataOutputStream.writeUTF(name+": "+msg);
-                if (msg.equalsIgnoreCase("Exit")) {
-                    connection = true;
-                    kill();
-                }
+                if (msg.equalsIgnoreCase("Exit"))
+                    kill(false);
             } catch (IOException e) {
-                e.printStackTrace();
+                kill(false);
             }
         }
     }
-    void kill() {
+    void kill(boolean flag) {
+        killcount++;
+        connection = true;
         kill = true;
+        if(killcount == 1 && !flag)
+            textArea.append("Connection Lost\nSet Again!\n");
+        if(killcount == 1 && flag)
+            textArea.append("Resetting\n");
         try {
             if(dataOutputStream != null)
                 dataOutputStream.close();

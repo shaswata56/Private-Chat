@@ -265,12 +265,12 @@ public class Private_Chat extends javax.swing.JFrame {
                     app.isSet = false;
                     while (true) {
                         if (app.isSet) {
-                            serverListener.kill();
+                            serverListener.kill(true);
                             break;
                         }
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
-                            serverListener.OutputStrem(app.msg, app.name);
+                            serverListener.OutputStream(app.msg, app.name);
                             app.jTextArea1.append(app.name+": "+app.msg);
                             app.msg = "";
                         }
@@ -292,7 +292,7 @@ public class Private_Chat extends javax.swing.JFrame {
                     app.isSet = false;
                     while (true) {
                         if (app.isSet) {
-                            clientSide.kill();
+                            clientSide.kill(true);
                             break;
                         }
                         if (!app.msg.equals("")) {
@@ -313,6 +313,7 @@ public class Private_Chat extends javax.swing.JFrame {
                     }
                 }
             }
+            app.msg = "";
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

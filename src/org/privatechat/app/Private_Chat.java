@@ -1,6 +1,9 @@
 package org.privatechat.app;
 
 import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Field;
+import java.net.URL;
 
 public class Private_Chat extends javax.swing.JFrame {
 
@@ -220,15 +223,30 @@ public class Private_Chat extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Private_Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            try {
+                Toolkit xToolkit = Toolkit.getDefaultToolkit();
+                Field awtAppClassNameField = xToolkit.getClass().getDeclaredField("awtAppClassName");
+                awtAppClassNameField.setAccessible(true);
+                awtAppClassNameField.set(xToolkit, "IP Chat");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+        URL url = Private_Chat.class.getResource("/private.png");
         Private_Chat app = new Private_Chat("Private Chat");
+        if (url != null) {
+            Image img = Toolkit.getDefaultToolkit().getImage(url);
+            app.setIconImage(img);
+        }
         app.setVisible(true);
         app.setResizable(false);
         app.jLabel2.setVisible(false);
         app.jTextField2.setVisible(false);
         app.jTextField2.setVisible(false);
 
-        while(true) {
+        while (true) {
             if(app.isSet) {
                 if(app.server) {
                     ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);

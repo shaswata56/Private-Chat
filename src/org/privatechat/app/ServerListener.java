@@ -1,6 +1,7 @@
 package org.privatechat.app;
 
 import org.privatechat.security.RSA;
+import org.privatechat.security.RSAKeyGen;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -9,7 +10,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.util.Base64;
 
 class ServerListener extends Thread {
 
@@ -20,18 +23,20 @@ class ServerListener extends Thread {
     private Socket sock;
     private boolean kill = false, connected = false, connection = false, exchanged = false, get = false;
     private int port, killCount = 0;
-    private PublicKey publicKey, myKey;
+    private PublicKey publicKey;
+    private RSA rsaUtil;
 
     ServerListener(int port, JTextArea textArea) {
         this.port = port;
-        RSA.generateKeys();
         this.textArea = textArea;
-        myKey = RSA.getPublicKey();
+        rsaUtil = new RSA();
     }
 
     @Override
     public void run() {
         try {
+            RSAKeyGen keyGen = new RSAKeyGen();
+            keyGen.generate();
             serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(100000);
             sock = serverSocket.accept();
@@ -44,14 +49,11 @@ class ServerListener extends Thread {
             if (!exchanged) {
                 try {
                     if(!get) {
-                        dataOutputStream.write(myKey.getEncoded());
+                        dataOutputStream.write(Base64.getEncoder().encode(rsaUtil.getPublicKey().getEncoded()));
                         String key = dataInputStream.readUTF();
-                        System.out.println(key.length());
-
-                            publicKey = RSA.decodePublicKey(key);
-                            get = true;
-                            textArea.append("\tdone");
-
+                        publicKey = rsaUtil.decodePublicKey(Base64.getDecoder().decode(key));
+                        get = true;
+                        textArea.append("\tdone");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -62,7 +64,7 @@ class ServerListener extends Thread {
             textArea.append("\t\t\t\t done\n");
             while (!kill) {
                 try {
-                    String out = RSA.decrypt(dataInputStream.readUTF());
+                    String out = rsaUtil.decrypt(dataInputStream.readUTF());
                     textArea.append(out);
                     String[] word = out.split(":");
                     if(word[1].trim().equalsIgnoreCase("Exit"))
@@ -71,7 +73,7 @@ class ServerListener extends Thread {
                     kill(false);
                 }
             }
-        } catch (IOException ignored) {
+        } catch (IOException | NoSuchAlgorithmException ignored) {
             kill(false);
         }
     }
@@ -79,7 +81,7 @@ class ServerListener extends Thread {
     void OutputStream(String msg, String name){
         if(connected){
             try {
-                dataOutputStream.writeUTF(RSA.encrypt(name+": "+msg, publicKey));
+                dataOutputStream.writeUTF(rsaUtil.encrypt(name+": "+msg, publicKey));
                 if(msg.equalsIgnoreCase("Exit") || serverSocket.isClosed())
                     kill(false);
             } catch (IOException e) {

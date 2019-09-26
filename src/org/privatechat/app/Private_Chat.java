@@ -258,11 +258,11 @@ public class Private_Chat extends javax.swing.JFrame {
 
         while (true) {
             if(app.isSet) {
+                app.isSet = false;
                 if(app.server) {
                     ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
                     serverListener.start();
                     app.jTextArea1.append("Server Started\n");
-                    app.isSet = false;
                     while (true) {
                         if (app.isSet) {
                             serverListener.kill(true);
@@ -286,22 +286,21 @@ public class Private_Chat extends javax.swing.JFrame {
                     }
                 }
                 else{
-                    ClientSide clientSide = new ClientSide(app.ip, Integer.parseInt(app.port), app.jTextArea1);
-                    clientSide.start();
+                    ClientStation clientStation = new ClientStation(app.ip, Integer.parseInt(app.port), app.jTextArea1);
+                    clientStation.start();
                     app.jTextArea1.append("Client Started\n");
-                    app.isSet = false;
                     while (true) {
                         if (app.isSet) {
-                            clientSide.kill(true);
+                            clientStation.kill(true);
                             break;
                         }
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
-                            clientSide.OutputStream(app.msg, app.name);
+                            clientStation.OutputStream(app.msg, app.name);
                             app.jTextArea1.append(app.name+": "+app.msg);
                             app.msg = "";
                         }
-                        if(clientSide.checkMsg()){
+                        if(clientStation.checkMsg()){
                             app.isSet = false;
                             break;
                         }

@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7bc70443-f2e1-4137-b1e1-75844b58f449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ClientSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ClientSide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ClientSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ClientStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/security/RSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/security/RSA.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,18 +60,13 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Private_Chat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Private_Chat" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.privatechat.app.Private_Chat" />
       <module name="Private-Chat" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Private_Chat" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -92,6 +88,9 @@
       <workItem from="1569005487443" duration="4191000" />
       <workItem from="1569083596266" duration="8865000" />
       <workItem from="1569097029233" duration="1365000" />
+      <workItem from="1569183112923" duration="3698000" />
+      <workItem from="1569190759623" duration="4962000" />
+      <workItem from="1569511373603" duration="5918000" />
     </task>
     <servers />
   </component>

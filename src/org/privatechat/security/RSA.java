@@ -38,7 +38,7 @@ public class RSA {
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     public static String decrypt(String text) {
@@ -49,12 +49,12 @@ public class RSA {
         } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     public static PublicKey decodePublicKey(String stored) throws GeneralSecurityException, IOException
     {
-        byte[] data = Base64.getDecoder().decode((stored.getBytes()));
+        byte[] data = stored.getBytes();
         X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
         KeyFactory fact = KeyFactory.getInstance("RSA");
         return fact.generatePublic(spec);

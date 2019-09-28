@@ -4,12 +4,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -18,13 +14,9 @@ public class RSA {
     private PublicKey publicKey;
     private  PrivateKey privateKey;
 
-    public RSA() {
-        try {
-            publicKey = decodePublicKey(Files.readAllBytes(Paths.get("RSA/publicKey")));
-            privateKey = decodePrivateKey(Files.readAllBytes(Paths.get("RSA/privateKey")));
-        } catch (IOException | GeneralSecurityException e) {
-            e.printStackTrace();
-        }
+    public RSA(RSAKeyGen keyGen) {
+            publicKey = keyGen.keyPair.getPublic();
+            privateKey = keyGen.keyPair.getPrivate();
     }
 
     public PublicKey getPublicKey() {
@@ -53,27 +45,22 @@ public class RSA {
         return "";
     }
 
-    public PublicKey decodePublicKey(byte[] stored) throws GeneralSecurityException, IOException
+    public PublicKey decodePublicKey(byte[] stored)
     {
         X509EncodedKeySpec spec = new X509EncodedKeySpec(stored);
-        KeyFactory fact = KeyFactory.getInstance("RSA");
-        return fact.generatePublic(spec);
-    }
-
-    public PrivateKey decodePrivateKey(byte[] key){
-        PrivateKey privateKey = null;
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
-        KeyFactory keyFactory = null;
+        KeyFactory fact = null;
         try {
-            keyFactory = KeyFactory.getInstance("RSA");
+            fact = KeyFactory.getInstance("RSA");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         try {
-            privateKey = keyFactory.generatePrivate(keySpec);
+            assert fact != null;
+            return fact.generatePublic(spec);
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        return privateKey;
+        return null;
     }
+
 }

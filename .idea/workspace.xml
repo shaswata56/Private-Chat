@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bc70443-f2e1-4137-b1e1-75844b58f449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/org/privatechat/security/RSAKeyGen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Private_Chat_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ClientStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ClientStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/Private_Chat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/security/RSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/security/RSA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/security/RSAKeyGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/security/RSAKeyGen.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,10 +32,10 @@
   <component name="ProjectId" id="1Qw7zn4iYwmoeQJJfEfIB9q4cIr" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/META-INF" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -90,7 +92,8 @@
       <workItem from="1569097029233" duration="1365000" />
       <workItem from="1569183112923" duration="3698000" />
       <workItem from="1569190759623" duration="4962000" />
-      <workItem from="1569511373603" duration="9763000" />
+      <workItem from="1569511373603" duration="19597000" />
+      <workItem from="1569636395442" duration="8767000" />
     </task>
     <servers />
   </component>

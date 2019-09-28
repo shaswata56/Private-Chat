@@ -256,10 +256,10 @@ public class Private_Chat extends javax.swing.JFrame {
         app.jTextField2.setVisible(false);
         app.jTextField2.setVisible(false);
 
-        while (true) {
-            if(app.isSet) {
+        while (app.isEnabled()) {
+            if (app.isSet) {
                 app.isSet = false;
-                if(app.server) {
+                if (app.server) {
                     ServerListener serverListener = new ServerListener(Integer.parseInt(app.port), app.jTextArea1);
                     serverListener.start();
                     app.jTextArea1.append("Server Started\n");
@@ -271,10 +271,10 @@ public class Private_Chat extends javax.swing.JFrame {
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
                             serverListener.OutputStream(app.msg, app.name);
-                            app.jTextArea1.append(app.name+": "+app.msg);
+                            app.jTextArea1.append(app.name + ": " + app.msg);
                             app.msg = "";
                         }
-                        if(serverListener.checkMsg()){
+                        if (serverListener.checkMsg()) {
                             app.isSet = false;
                             break;
                         }
@@ -284,8 +284,7 @@ public class Private_Chat extends javax.swing.JFrame {
                             e.printStackTrace();
                         }
                     }
-                }
-                else{
+                } else {
                     ClientStation clientStation = new ClientStation(app.ip, Integer.parseInt(app.port), app.jTextArea1);
                     clientStation.start();
                     app.jTextArea1.append("Client Started\n");
@@ -297,10 +296,10 @@ public class Private_Chat extends javax.swing.JFrame {
                         if (!app.msg.equals("")) {
                             app.msg += '\n';
                             clientStation.OutputStream(app.msg, app.name);
-                            app.jTextArea1.append(app.name+": "+app.msg);
+                            app.jTextArea1.append(app.name + ": " + app.msg);
                             app.msg = "";
                         }
-                        if(clientStation.checkMsg()){
+                        if (clientStation.checkMsg()) {
                             app.isSet = false;
                             break;
                         }

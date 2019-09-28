@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Private-Chat:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Private_Chat_jar</output-path>
-    <root id="archive" name="Private-Chat.jar">
-      <element id="module-output" name="Private-Chat" />
-    </root>
-  </artifact>
-</component>

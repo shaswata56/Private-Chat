@@ -8,9 +8,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.security.GeneralSecurityException;
-import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class ClientStation extends Thread{
@@ -18,61 +17,59 @@ public class ClientStation extends Thread{
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private String ip;
-    private boolean connected = false, kill = false, connection = false, exchanged = false, get = false;
+    private boolean connected = false;
+    private boolean kill = false;
+    private boolean connection = false;
+    private boolean exchanged = false;
     private int port, killCount = 0;
     private JTextArea textArea;
     private PublicKey publicKey;
+    private RSAKeyGen keyGen;
     private RSA rsaUtil;
 
     ClientStation(String ip, int port, JTextArea textArea){
         this.ip = ip;
         this.port = port;
         this.textArea = textArea;
-        rsaUtil = new RSA();
     }
     @Override
     public void run(){
         try {
             while(!kill) {
                 try {
-                    RSAKeyGen keyGen = new RSAKeyGen();
-                    keyGen.generate();
+                    keyGen = new RSAKeyGen();
                     client = new Socket(ip, port);
                     if(client.isConnected()) break;
                 }catch (IOException ignored) {
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
                 }
             }
             if (!kill) {
                 connected = true;
+                rsaUtil = new RSA(keyGen);
                 dataOutputStream = new DataOutputStream(client.getOutputStream());
                 dataInputStream = new DataInputStream(client.getInputStream());
             }
-            textArea.append("Exchanging Keys");
-            if (!exchanged) {
-                try {
-                    if(!get) {
-                        dataOutputStream.write(Base64.getEncoder().encode(rsaUtil.getPublicKey().getEncoded()));
-                        String key = dataInputStream.readUTF();
-                        publicKey = rsaUtil.decodePublicKey(Base64.getDecoder().decode(key));
-                        get = true;
-                        textArea.append("\tdone");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (GeneralSecurityException e) {
-                    System.out.println("Some problem with receiving keys!");
-                }
-            }
-            textArea.append("\t\t\t\t done\n");
             while (!kill) {
                 try {
-                    String out = rsaUtil.decrypt(dataInputStream.readUTF());
-                    textArea.append(out);
-                    String[] word = out.split(":");
-                    if(word[1].trim().equalsIgnoreCase("Exit"))
-                        kill(false);
+                    String[] word;
+                    if(exchanged)
+                    {
+                        String out = rsaUtil.decrypt(dataInputStream.readUTF());
+                        textArea.append(out);
+                        word = out.split(":");
+                    } else {
+                        byte[] out = Base64.getEncoder().encode(rsaUtil.getPublicKey().getEncoded());
+                        dataOutputStream.write(out);
+                        dataInputStream.readFully(out);
+                        publicKey = rsaUtil.decodePublicKey(Base64.getDecoder().decode(out));
+                        textArea.append(Base64.getEncoder().encodeToString(publicKey.getEncoded()) + "\n");
+                        textArea.append("Key Exchanged!\nAll communication is currently encrypted by RSA 2048 bit Public Key!\n");
+                        word = Arrays.toString(out).split(":");
+                        exchanged = true;
+                    }
+                    if(word.length > 1)
+                        if(word[1].trim().equalsIgnoreCase("Exit"))
+                            kill(false);
                 } catch (IOException e) {
                     kill(false);
                     break;

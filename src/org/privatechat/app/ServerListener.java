@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.PublicKey;
@@ -38,6 +39,7 @@ class ServerListener extends Thread {
         try {
             RSAKeyGen keyGen = new RSAKeyGen();
             serverSocket = new ServerSocket(port);
+            textArea.append("Your IP: "+ Inet4Address.getLocalHost().toString().split("/")[1] + "\n");
             serverSocket.setSoTimeout(100000);
             sock = serverSocket.accept();
             if(!kill) {

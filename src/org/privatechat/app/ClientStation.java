@@ -67,7 +67,7 @@ public class ClientStation extends Thread{
                         word = Arrays.toString(out).split(":");
                         exchanged = true;
                     }
-                    if(word.length > 1)
+                    if(word.length == 2)
                         if(word[1].trim().equalsIgnoreCase("Exit"))
                             kill(false);
                 } catch (IOException e) {
@@ -97,9 +97,9 @@ public class ClientStation extends Thread{
         connection = true;
         kill = true;
         if(killCount == 1 && !flag)
-            textArea.append("Connection Lost\nSet Again!\n");
+            textArea.append("Connection Terminated\nSet Again!\n");
         if(killCount == 1 && flag)
-            textArea.append("Resetting\n");
+            textArea.append("Connection Reestablishing\n");
         try {
             if(dataOutputStream != null)
                 dataOutputStream.close();

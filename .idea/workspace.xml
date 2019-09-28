@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7bc70443-f2e1-4137-b1e1-75844b58f449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ClientStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ClientStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/privatechat/app/ServerListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,7 +89,7 @@
       <workItem from="1569183112923" duration="3698000" />
       <workItem from="1569190759623" duration="4962000" />
       <workItem from="1569511373603" duration="19597000" />
-      <workItem from="1569636395442" duration="10608000" />
+      <workItem from="1569636395442" duration="11992000" />
     </task>
     <servers />
   </component>
